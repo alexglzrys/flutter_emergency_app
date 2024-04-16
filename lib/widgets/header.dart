@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget referente al header de la aplicación
 class Header extends StatelessWidget {
-  const Header({super.key});
+  const Header(
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.subitle,
+      required this.primaryColor,
+      required this.secondaryColor});
+
+  // Propiedades que permiten parametrizar de forma dinámica la información a mostrar en este widget
+  final IconData icon;
+  final String title;
+  final String subitle;
+  final Color primaryColor;
+  final Color secondaryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +24,14 @@ class Header extends StatelessWidget {
     // En este caso el contenido del header actuan como elementos sitiados dentro de una pila, y no como hijos directos del elemento encargado de generar el color de fopndo gradiente
     return Stack(children: [
       // Color de fondo gradiente
-      const _BackgroundGradient(),
+      _BackgroundGradient(primaryColor, secondaryColor),
       // Icono de cruz roja con opacidad situado de forma absoluta
       Positioned(
         top: -50,
         left: -70,
         // El icono forma parte del paquete FontAwesome
         child: FaIcon(
-          FontAwesomeIcons.plus,
+          icon,
           color: Colors.white.withOpacity(0.3),
           size: 220,
         ),
@@ -29,7 +43,7 @@ class Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Solicitudes',
+              title,
               style:
                   TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 18),
             ),
@@ -37,14 +51,14 @@ class Header extends StatelessWidget {
               height: 10,
               width: double.infinity,
             ),
-            Text('Asistencia Médica',
+            Text(subitle,
                 style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 25,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
-            const FaIcon(
-              FontAwesomeIcons.plus,
+            FaIcon(
+              icon,
               color: Colors.white,
               size: 60,
             ),
@@ -57,20 +71,23 @@ class Header extends StatelessWidget {
 
 // Widget que representa el color de fondo gradiente
 class _BackgroundGradient extends StatelessWidget {
-  const _BackgroundGradient();
+  const _BackgroundGradient(this.primaryColor, this.secondaryColor);
+
+  final Color primaryColor;
+  final Color secondaryColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(80),
           ),
           gradient: LinearGradient(
             colors: [
-              Color(0xffff0000),
-              Color(0xff8f0000),
+              primaryColor,
+              secondaryColor,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
