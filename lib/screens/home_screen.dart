@@ -8,18 +8,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Header(
+            const Header(
               icon: FontAwesomeIcons.plus,
               title: 'Solicitudes',
               subitle: 'Asistencia Médica',
               primaryColor: Color(0xffff0000),
               secondaryColor: Color(0xff8f0000),
             ),
-            DataSheet(),
+            DataSheet(
+              icon: FontAwesomeIcons.carBurst,
+              title: 'Accidente de Automovil',
+              primaryColor: const Color(0xff542c9a),
+              secondaryColor: const Color(0xff8f35b5),
+              function: () {
+                // ignore: avoid_print
+                print('Automovil');
+              },
+            ),
           ],
         ),
       ),
