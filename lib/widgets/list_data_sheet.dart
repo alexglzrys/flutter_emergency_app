@@ -9,6 +9,9 @@ class ListDataSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
+      // controlar el comportamiento de desplazamiento
+      // BouncingScrollPhysics es una clase que define un comportamiento de desplazamiento elástico. Este efecto es similar al comportamiento de desplazamiento en dispositivos iOS, donde el contenido rebota cuando llega al final de la lista.
+      physics: const BouncingScrollPhysics(),
       // Por cada elemento en la lista, renderiza un widget DataSheet
       itemBuilder: (context, index) => DataSheet(
         title: data[index]['title'],

@@ -64,8 +64,68 @@ class Header extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
+      // Botón de acción en la parte superior derecha
+      Positioned(
+          right: 0,
+          top: 0,
+          // Debe mostrarse dentro de un área segura
+          child: SafeArea(
+            // Conservar el efecto de ripple
+            child: Material(
+              color: Colors.transparent,
+              // Forma que tomará el efecto de ripple
+              shape: const CircleBorder(),
+              // Controlar cómo se debe manejar el recorte del contenido cuando el widget se desborda de sus límites (efecto ripple solo debe ser visible dentro de los bordes redondeados).
+              clipBehavior: Clip.hardEdge,
+              child: IconButton(
+                icon: const FaIcon(
+                  FontAwesomeIcons.ellipsisVertical,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  // Mostrar un cuadro de dialogo para solicitar asistencia médica inmediata
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const _AlertCall();
+                    },
+                  );
+                },
+              ),
+            ),
+          ))
     ]);
+  }
+}
+
+// Wisget de alerta cuando se activa una solicutud de asistencia médica inmediata
+class _AlertCall extends StatelessWidget {
+  const _AlertCall();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog.adaptive(
+      title: const Text(
+        'Solicitar asistencia',
+        style: TextStyle(color: Colors.red),
+      ),
+      content: const Text(
+          'Mantenga la calma, cuando el operador atienda su llamada, favor de proporcionar su nombre, padecimientos y si es usted alérgico a cierto tipo de medicamento.\n\nEn breve llegará una ambulancia para auxiliarle.'),
+      actions: [
+        IconButton(
+          onPressed: () {
+            // ignore: avoid_print
+            print(
+                'obteniendo ubicación y llamando para recibir asistencia inmediata');
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.phone,
+            color: Colors.teal,
+          ),
+        )
+      ],
+    );
   }
 }
 
