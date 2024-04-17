@@ -23,7 +23,6 @@ class DataSheet extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      margin: const EdgeInsets.all(16),
       decoration: _decorationDataSheet(primaryColor, secondaryColor),
       // Ajustar el contenido al área segura (bordes redondeados) del Container (o elemento padre)
       child: ClipRRect(
